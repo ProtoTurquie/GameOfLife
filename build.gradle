@@ -1,0 +1,45 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		google()
+		gradlePluginPortal()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+	}
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+		classpath "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+		classpath "org.jetbrains.kotlin:kotlin-script-runtime:1.5.21"
+	}
+}
+
+allprojects {
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+	ext{
+		visuiVersion = '1.5.0'
+	}
+}
+configure(subprojects) {
+	apply plugin: 'java-library'
+	apply plugin: 'kotlin'
+	sourceCompatibility = 8.0
+	compileJava {
+		options.incremental = true
+	}
+}
+
+
+subprojects {
+	version = '0.0.1'
+	ext.appName = 'GameName'
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		gradlePluginPortal()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+		maven { url 'https://jitpack.io' }
+	}
+}
+
+eclipse.project.name = 'GameName' + '-parent'
